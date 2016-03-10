@@ -45,7 +45,7 @@ http.createServer(function(req, res) {
 					res.write("<html><head>");
 					res.write('<script type="text/javascript" src="/client.js"></script>');
 					res.write('</head><body>');
-					res.write('<div id="boxes">');
+					res.write('<form id="boxes">');
 					var elems = JSON.parse(content);
 					for(var i = 0; i < elems.length; i++) {
 						var ele = elems[i];
@@ -66,7 +66,7 @@ http.createServer(function(req, res) {
 						}
 						res.write("</label><br />");
 					}
-					res.write("</div></body></html>");
+					res.write("</form></body></html>");
 					res.end();
 				}
 			}

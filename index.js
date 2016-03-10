@@ -49,8 +49,21 @@ http.createServer(function(req, res) {
 					var elems = JSON.parse(content);
 					for(var i = 0; i < elems.length; i++) {
 						var ele = elems[i];
-						res.write("<label>" + ele.label + ": ");
-						res.write("<input type=\""+ele.type+"\" class=\"input\" />");
+						res.write("<label class=\"mainLabel\">" + ele.label + ": ");
+						if(ele.type == "radio") {
+							for(var j = 0; j < ele.choices.length; j++) {
+								var choice = ele.choices[j];
+								res.write('<label><br />');
+								res.write('<input type="radio" class="input" name="radio'+i+'" value="'+choice+'" />');
+								res.write(choice+'</label>');
+							}
+						}
+						else if(ele.type == "textarea") {
+							res.write('<textarea class="input"></textarea>');
+						}
+						else {
+							res.write("<input type=\""+ele.type+"\" class=\"input\" />");
+						}
 						res.write("</label><br />");
 					}
 					res.write("</div></body></html>");

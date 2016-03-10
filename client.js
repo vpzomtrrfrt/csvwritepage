@@ -4,13 +4,30 @@ window.onload = function() {
 	button.textContent = "Save";
 	button.onclick = function() {
 		var csv = "";
-		var elems = boxes.getElementsByClassName("input");
-		for(var i = 0; i < elems.length; i++) {
-			var input = elems[i];
+		var labels = boxes.getElementsByClassName("mainLabel");
+		for(var i = 0; i < labels.length; i++) {
+			var label = labels[i];
 			if(csv.length != 0) {
 				csv += ",";
 			}
-			var val = input.value;
+			var inputs = label.getElementsByClassName("input");
+			var val = null;
+			if(inputs.length == 1) {
+				if(inputs[0].type == "checkbox") {
+					val = inputs[0].checked?1:0;
+				}
+				else {
+					val = inputs[0].value;
+				}
+			}
+			else {
+				for(var j = 0; j < inputs.length; j++) {
+					if(inputs[j].checked) {
+						val = inputs[j].value;
+					}
+				}
+			}
+			val = val+"";
 			if(val.indexOf(",") > -1 || val.indexOf("\n") > -1) {
 				csv += '"'+val+'"';
 			}
